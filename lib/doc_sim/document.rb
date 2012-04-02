@@ -89,5 +89,9 @@ end
 
 class String
 	include Stemmable
+
+	def strip_tags
+		self.gsub!(/<.*?>/m, '')
+	end
 end
 
