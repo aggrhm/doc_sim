@@ -47,7 +47,7 @@ module DocSim
 		# returns array of all terms found in document
 		def to_terms
 			raise "Document invalid." unless @doc
-			terms = @doc.gsub(/(\d|\W)+/u, ' ').strip.split(' ')
+			terms = @doc.gsub(/[^a-z]+/u, ' ').strip.split(' ')
 			terms.reject! do |term|
 				#@@stop_words.include?(term) || term.length < 4 || term.length > 20
         ((term.length < 3 && !SHORT_WORDS.include?(term)) || term.length > 20)
