@@ -44,13 +44,13 @@ module DocSim
 
 		# builds a weighted vector model for a document using the term frequency
 		# and document frequency
-		def self.build_vector_model(full_term_set, doc_map, doc_count)
+		def self.build_vector_model(full_term_set, doc_map)
 			vector = Hash.new(0)
 			term_count = doc_map.values.sum.to_f
 			full_term_set.each do |term, df|
 				tf = doc_map[term] / term_count
 				#puts "tf for #{term} = #{tf}"
-				idf = Math.log(doc_count / df.to_f)
+				idf = Math.log(1.0 / df.to_f)
 				vector[term] = tf * idf
 			end
 			vector
