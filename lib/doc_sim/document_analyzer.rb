@@ -33,11 +33,11 @@ module DocSim
 
 		# compares 2 documents by building vector models for both and
 		# taking the cosine of the angle between them
-		def self.compare_documents(full_term_set, doc_map1, doc_map2, doc_count)
+		def self.compare_documents(full_term_set, doc_map1, doc_map2)
 			# build vectors
 			#vector1 = self.build_vector_model(full_term_set, doc_map1)
 			#vector2 = self.build_vector_model(full_term_set, doc_map2)
-      vectors = self.build_vector_models(full_term_set, doc_map1, doc_map2, doc_count)
+      vectors = self.build_vector_models(full_term_set, doc_map1, doc_map2)
 
 			cos = VectorMath.cosine(vectors[0], vectors[1])
 		end
@@ -57,14 +57,14 @@ module DocSim
 		end
 
     # builds vector models for both documents at once
-    def self.build_vector_models(full_term_set, doc_map1, doc_map2, doc_count)
+    def self.build_vector_models(full_term_set, doc_map1, doc_map2)
       vectors = [Hash.new(0), Hash.new(0)]
       term_count1 = doc_map1.values.sum.to_f
       term_count2 = doc_map2.values.sum.to_f
       full_term_set.each do |term, df|
         tf1 = doc_map1[term] / term_count1
         tf2 = doc_map2[term] / term_count2
-        idf = Math.log(doc_count / df.to_f)
+        idf = Math.log(1.0 / df.to_f)
         vectors[0][term] = tf1 * idf
         vectors[1][term] = tf2 * idf
       end
