@@ -7,7 +7,7 @@ require 'stemmer'
 module DocSim
 	class Document
     STOP_WORDS = %w{ the thi these there is a on this and or any from if be do at
-  with without not as that nbsp when also wherein therein which each would such further have more will within herein system includ within compris contain other devic provid particular particularli applic some exampl servic method about what thing kind exemplari both than into must certain thereof becaus through typic forth thereon likewis type although moreov those thereto been henc manner necessarili refer variou while howev gener regard rather mere suitabl accordingli disclos anymor said claim overal embodi appropri suitabl where then accord content item whether consid might given s to t us could well d made data object invent ar for fig can ha let ani it but etc who via yet did get how few per try met all thu doe mai wa }
+  with without not as that nbsp when also wherein therein which each would such further have more will within herein system includ within compris contain other devic provid particular particularli applic some exampl servic method about what thing kind exemplari both than into must certain thereof becaus through typic forth thereon likewis type although moreov those thereto been henc manner necessarili refer variou while howev gener regard rather mere suitabl accordingli disclos anymor said claim overal embodi appropri suitabl where then accord content item whether consid might given s to t us could well d made data object invent ar for fig can ha let ani it but etc who via yet did get how few per try met all thu doe mai wa their}
     SHORT_WORDS = %{ top pay ad ads }
 
 		# new from string
