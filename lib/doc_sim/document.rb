@@ -93,5 +93,33 @@ class String
 	def strip_tags
 		self.gsub(/<.*?>/m, '')
 	end
+
+	def sanitize_tags
+		ret = self.downcase
+		ret.gsub!(/<style.*?\/style>/m, '')
+		ret.gsub!(/<script.*?\/script>/m, '')
+		ret.gsub!(/<.*?>/m, ' ')
+		ret.gsub!(/\s+/, ' ')
+		ret
+	end
+
+  # 1. downcase
+  # 2. strip tags and extra whitespace
+  # 3. remove non a-z characters
+  # 4. remove words shorter than 3 chars or longer than 20
+  # 5. stem terms
+  # 6. remove stems less than 2 chars long
+  # 7. remove stopwords
+  def strip_to_stems
+    str = self.sanitize_tags
+    terms = str.gsub(/[^a-z]+/u, ' ').strip.split(' ')
+    terms.reject! do |term|
+        ((term.length < 3 && !SHORT_WORDS.include?(term)) || term.length > 20)
+    end
+    terms.collect! {|term| term.stem}
+    terms = terms.select {|term| term.length > 1}
+    terms - STOP_WORDS
+    return terms.join(' ')
+  end
 end
 
