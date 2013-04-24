@@ -97,8 +97,8 @@ with without not as that nbsp when also wherein therein which each would such fu
 
 	def sanitize_tags
 		ret = self.downcase
-		ret.gsub!(/<style.*?\/style>/m, '')
-		ret.gsub!(/<script.*?\/script>/m, '')
+		#ret.gsub!(/<style.*?\/style>/m, '')
+		#ret.gsub!(/<script.*?\/script>/m, '')
 		ret.gsub!(/<.*?>/m, ' ')
 		ret.gsub!(/\s+/, ' ')
 		ret
@@ -113,8 +113,8 @@ with without not as that nbsp when also wherein therein which each would such fu
   # 7. remove stopwords
   def strip_to_stems
     str = self.sanitize_tags
-    terms = str.gsub(/[^a-z]+/u, ' ').strip.split(' ')
-    terms.reject! do |term|
+    terms_a = str.gsub(/[^a-z]+/u, ' ').strip.split(' ')
+    terms = terms_a.reject do |term|
         ((term.length < 3 && !SHORT_WORDS.include?(term)) || term.length > 20)
     end
     terms.collect! {|term| term.stem}
